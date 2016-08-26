@@ -9,13 +9,13 @@ def home_page(request):
     return HttpResponse("you are at twitter.home_page")
 
 
-def user_profile(request):
-    return HttpResponse("you are at twitter.user_profile")
+def user_profile(request, username):
+    return HttpResponse("you are at twitter.user_profile for user " + username)
 
 
-def post_tweet(request):
-    return HttpResponse("you are at twitter.post_tweet")
+def post_tweet(request, tweet_id):
+    return HttpResponse("you are at twitter.post_tweet with id " + tweet_id)
 
 
-def delete_tweet(request):
-    return HttpResponse("you are at twitter.delete_tweet")
+def delete_tweet(request, tweet_id):
+    return HttpResponse("you are at twitter.delete_tweet with id " + tweet_id)
