@@ -20,4 +20,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('twitter.urls')),
+    url('^auth/', include('django.contrib.auth.urls')),
 ]
