@@ -20,11 +20,14 @@
     {% block css_fa %}
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     {% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}"/>
+
   {% endblock %}
 </head>
-<body style="padding-top: 70px">
+<body>
 {% block body %}
-  <div class="container">
+  <div class="container body-container">
     {% block header %}
       <div class="row">
         <nav class="navbar navbar-default navbar-fixed-top">
