@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def home_page(request):
     # need to check auth
     return HttpResponse("you are at twitter.home_page")

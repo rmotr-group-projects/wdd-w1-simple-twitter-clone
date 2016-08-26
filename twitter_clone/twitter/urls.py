@@ -2,6 +2,8 @@ from django.conf.urls import url
 
 from . import views
 
+app_name = 'twitter'
+
 urlpatterns = [
     url(r'^$', views.home_page, name='home_page'),
     url(r'^login/', views.login, name='login'),
