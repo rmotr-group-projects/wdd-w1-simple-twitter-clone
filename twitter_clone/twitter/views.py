@@ -19,3 +19,7 @@ def post_tweet(request, tweet_id):
 
 def delete_tweet(request, tweet_id):
     return HttpResponse("you are at twitter.delete_tweet with id " + tweet_id)
+
+
+def login(request):
+    return HttpResponse("you are at twitter.login")
