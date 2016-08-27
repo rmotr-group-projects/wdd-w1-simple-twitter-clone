@@ -19,7 +19,7 @@
 
 
 {% block delete_button %}
-  <form id='delete-tweet-form-{{ tweet.id }}' action="{% url 'twitter:delete_tweet' tweet.id %}" method="POST">
+  <form id='delete-tweet-form-{{ tweet.id }}' action="{% url 'twitter:delete_tweet' tweet.id %}?next={{ request.path }}" method="POST">
     {% csrf_token %}
     <button type="submit" class="close" title="Delete this tweet"><span aria-hidden="true">&times;</span></button>
   </form>

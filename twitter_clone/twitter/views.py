@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.views.decorators.http import require_http_methods
 from .forms import TweetForm
 from .models import Tweet
@@ -34,5 +35,12 @@ def user_profile(request, username):
     return HttpResponse("you are at twitter.user_profile for user " + username)
 
 
+@login_required
+@require_http_methods(['POST'])
 def delete_tweet(request, tweet_id):
-    return HttpResponse("you are at twitter.delete_tweet with id " + tweet_id)
+    tweet = get_object_or_404(Tweet, pk=tweet_id)
+    if tweet.user != request.user:
+        raise PermissionDenied
+    tweet.delete()
+    messages.success(request, 'Tweet successfully deleted')
+    return redirect(request.GET.get('next', '/'))
