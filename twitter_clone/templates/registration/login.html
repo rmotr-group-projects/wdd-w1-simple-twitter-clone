@@ -4,7 +4,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <form action="{% url 'login' %}" method="POST">
+      <form action="" method="POST">
         {#        <input type='hidden' name='csrfmiddlewaretoken' value='PB1MS641epIjg7rad1X2YlsqjDSBySTP'/>#}
         {% csrf_token %}
         <div class="form-group">
@@ -24,7 +24,7 @@
 {% endblock %}
 
 
-{% block messages %}
+{% block common_messages %}
   {% if form.errors %}
     <div class="row">
       <div class="col-md-12">

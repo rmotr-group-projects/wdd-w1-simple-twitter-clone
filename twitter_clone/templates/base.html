@@ -56,9 +56,17 @@
       </div>
     {% endblock %}
 
-    {% block messages %}
-      {% if error_message %}
-        <div class="alert alert-danger" role="alert"><strong>{{ error_message }}</strong></div>
+    {% block common_messages %}
+      {% if messages %}
+        <div class="row">
+          <div class="col-sm-12 messages">
+            {% for message in messages %}
+              <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
       {% endif %}
     {% endblock %}
 
