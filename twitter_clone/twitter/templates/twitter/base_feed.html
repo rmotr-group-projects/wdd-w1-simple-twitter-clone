@@ -20,7 +20,7 @@
             <div class='tweet-content'>{{ tweet.content }}</div>
           </div>
         {% empty %}
-          <strong>@{{ request.user }} hasn't tweeted yet :(</strong>
+          <strong>@{{ user }} hasn't tweeted yet :(</strong>
         {% endfor %}
 
       </div>
