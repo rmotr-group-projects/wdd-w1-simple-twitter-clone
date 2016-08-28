@@ -38,19 +38,26 @@
 
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
-
+                {% if user.is_authenticated %}
                 <div class="row">
-                    <form role="form" class='tweet-form' action="" method="POST">
-                        <input type='hidden' name='csrfmiddlewaretoken' value='EWLMomFcnNj2hpWbcxx2M4Puhk3YztiH' />
+                    <form role="form" class='tweet-form' action="/tweet_created" method="POST">
+                        {% csrf_token %}
                         <div class="form-group ">
                             <textarea class="form-control" name="content" placeholder="Write your tweet here..." required></textarea>
 
 
                         </div>
                         <button type="submit" class="btn btn-info pull-right">Submit</button>
+                        {% if error %}
+                            <div class="form-group has-error">
+                                Ensure this value has at most 140 characters (it has {{ content_length }}).
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
                     </form>
-                </div>
-
+                
+                
                 <div class="row tweet-feed">
 
                     {% for tweet in all_tweets %}

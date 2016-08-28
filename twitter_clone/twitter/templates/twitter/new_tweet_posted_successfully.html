@@ -52,7 +52,7 @@
 
                 <div class="row">
                     <form role="form" class='tweet-form' action="" method="POST">
-                        <input type='hidden' name='csrfmiddlewaretoken' value='EWLMomFcnNj2hpWbcxx2M4Puhk3YztiH' />
+                        {% csrf_token %}
                         <div class="form-group ">
                             <textarea class="form-control" name="content" placeholder="Write your tweet here..." required></textarea>
 
@@ -64,47 +64,23 @@
 
                 <div class="row tweet-feed">
 
+                    {% for tweet in all_tweets %}
+
                     <div class="well well-large tweet-container">
 
-                        <form id='delete-tweet-form-10' action="/tweet/10/delete?next=/" method="POST">
-                            <input type='hidden' name='csrfmiddlewaretoken' value='EWLMomFcnNj2hpWbcxx2M4Puhk3YztiH' />
+                        <form id='delete-tweet-form-{{tweet.id}}' action="/tweet/{{tweet.id}}/delete?next=/" method="POST">
+                            {% csrf_token %}
                             <button type="submit" class="close" title="Delete this tweet"><span aria-hidden="true">&times;</span></button>
                         </form>
 
                         <div>
-                            <strong>@santiagobasulto</strong>
-                            <span class="label label-primary">Aug. 23, 2016, 3:18 p.m.</span>
+                            <strong>@{{tweet.user}}</strong>
+                            <span class="label label-primary">{{tweet.created}}</span>
                         </div>
-                        <div class='tweet-content'>This tweet works</div>
+                        <div class='tweet-content'>{{tweet.content}}</div>
                     </div>
 
-                    <div class="well well-large tweet-container">
-
-                        <form id='delete-tweet-form-9' action="/tweet/9/delete?next=/" method="POST">
-                            <input type='hidden' name='csrfmiddlewaretoken' value='EWLMomFcnNj2hpWbcxx2M4Puhk3YztiH' />
-                            <button type="submit" class="close" title="Delete this tweet"><span aria-hidden="true">&times;</span></button>
-                        </form>
-
-                        <div>
-                            <strong>@santiagobasulto</strong>
-                            <span class="label label-primary">Aug. 23, 2016, 3:15 p.m.</span>
-                        </div>
-                        <div class='tweet-content'>Second tweet!</div>
-                    </div>
-
-                    <div class="well well-large tweet-container">
-
-                        <form id='delete-tweet-form-8' action="/tweet/8/delete?next=/" method="POST">
-                            <input type='hidden' name='csrfmiddlewaretoken' value='EWLMomFcnNj2hpWbcxx2M4Puhk3YztiH' />
-                            <button type="submit" class="close" title="Delete this tweet"><span aria-hidden="true">&times;</span></button>
-                        </form>
-
-                        <div>
-                            <strong>@santiagobasulto</strong>
-                            <span class="label label-primary">Aug. 23, 2016, 3:15 p.m.</span>
-                        </div>
-                        <div class='tweet-content'>My first tweet!</div>
-                    </div>
+                    {% endfor %}
 
                 </div>
             </div>
