@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
+
 from .forms import TweetForm
 from .models import Tweet
 
@@ -31,8 +33,11 @@ def home_page(request):
     return render(request, 'twitter/authenticated_feed.html', context)
 
 
-@require_http_methods(['GET'])
 def user_profile(request, username):
+    if request.user.is_authenticated() and username == request.user.username:
+        return home_page(request)
+    if request.method == 'POST':
+        return HttpResponseForbidden()
     user = get_object_or_404(get_user_model(), username=username)
     tweets = Tweet.objects.filter(user=user)
     return render(request, 'twitter/base_feed.html', {'tweets': tweets, 'user': username})

@@ -4,7 +4,7 @@
   <div class="row">
     <form role="form" class='tweet-form' action="" method="POST">
       {% csrf_token %}
-      <div class="form-group ">
+      <div class="form-group {{form.errors|yesno:"has-error,,"}}">
         <textarea class="form-control" name="content" placeholder="Write your tweet here..." required></textarea>
         {% if form.content.errors %}
           {% for error in form.content.errors %}
