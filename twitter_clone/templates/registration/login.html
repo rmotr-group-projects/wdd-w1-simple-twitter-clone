@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+  <div class="row">
+    <div class="col-md-12">
+      <form action="" method="POST">
+        {#        <input type='hidden' name='csrfmiddlewaretoken' value='PB1MS641epIjg7rad1X2YlsqjDSBySTP'/>#}
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input class="form-control" name="username" placeholder="Your username" value="">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Your password">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+
+  </div>
+
+{% endblock %}
+
+
+{% block common_messages %}
+  {% if form.errors %}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-danger" role="alert"><p>Your username and password didn't match. Please try again.</p>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'twitter/base_feed.html' %}
+
+{% block submission_form %}
+  <div class="row">
+    <form role="form" class='tweet-form' action="" method="POST">
+      {% csrf_token %}
+      <div class="form-group {{form.errors|yesno:"has-error,,"}}">
+        <textarea class="form-control" name="content" placeholder="Write your tweet here..." required></textarea>
+        {% if form.content.errors %}
+          {% for error in form.content.errors %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <button type="submit" class="btn btn-info pull-right">Submit</button>
+    </form>
+  </div>
+{% endblock %}
+
+
+{% block delete_button %}
+  <form id='delete-tweet-form-{{ tweet.id }}' action="{% url 'twitter:delete_tweet' tweet.id %}?next={{ request.path }}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="close" title="Delete this tweet"><span aria-hidden="true">&times;</span></button>
+  </form>
+{% endblock %}

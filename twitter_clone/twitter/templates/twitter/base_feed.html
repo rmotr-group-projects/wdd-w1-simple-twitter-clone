@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+  <div class="row">
+    <div class="col-sm-8 col-md-offset-2">
+      {% block submission_form %}{% endblock %}
+
+      <div class="row tweet-feed">
+
+        {% for tweet in tweets %}
+          <div class="well well-large tweet-container">
+
+            {% block delete_button %}{% endblock %}
+
+            <div>
+              <strong>@{{ tweet.user }}</strong>
+              <span class="label label-primary">{{ tweet.created }}</span>
+            </div>
+            <div class='tweet-content'>{{ tweet.content }}</div>
+          </div>
+        {% empty %}
+          <strong>@{{ user }} hasn't tweeted yet :(</strong>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+
+{% endblock main_content %}

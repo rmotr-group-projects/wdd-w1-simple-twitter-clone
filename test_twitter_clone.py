@@ -43,7 +43,7 @@ class NotAuthenticatedTestCase(BaseTwitterCloneTestCase):
         "Should be redirected if trying to browse the home page"
         index = self.app.get('/')
         self.assertEqual(index.status_code, 302)
-        self.assertTrue(index.location.endswith('/login?next=/'))
+        self.assertTrue(index.location.endswith('/login?next=/'), index.location)
 
     def test_profile_view_redirects_if_not_authenticated(self):
         "Should see the profile even if not authenticated"
@@ -126,7 +126,7 @@ class CreateTweetTestCase(BaseTwitterCloneTestCase):
         form['content'] = 'a' * 141
         response = form.submit()
         div = response.form.html.find('div', class_='has-error')
-        self.assertIsNotNone(div)
+        self.assertIsNotNone(div, div)
         span = div.find('span')
         self.assertIsNotNone(span)
         self.assertEqual(
@@ -162,7 +162,7 @@ class BrowseProfileTestCase(BaseTwitterCloneTestCase):
         Tweet.objects.create(user=self.ev, content='My name is Evan')
 
         resp = self.app.get('/jack')
-
+        # self.assertFalse(True, str(resp))
         # Post conditions
         feed = resp.html.find('div', class_='tweet-feed')
 
