@@ -40,7 +40,8 @@
             <div class="col-sm-8">
                 {% if user.is_authenticated %}
                 <div class="row">
-                    <form role="form" class='tweet-form' action="/tweet_created" method="POST">
+                    <!--/tweet_created-->
+                    <form role="form" class='tweet-form' action="" method="POST">
                         {% csrf_token %}
                         <div class="form-group ">
                             <textarea class="form-control" name="content" placeholder="Write your tweet here..." required></textarea>
@@ -50,7 +51,7 @@
                         <button type="submit" class="btn btn-info pull-right">Submit</button>
                         {% if error %}
                             <div class="form-group has-error">
-                                Ensure this value has at most 140 characters (it has {{ content_length }}).
+                                <span>Ensure this value has at most 140 characters (it has {{ content_length }}).</span>
                             </div>
                         {% endif %}
                     </div>
