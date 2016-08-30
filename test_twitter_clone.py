@@ -254,7 +254,8 @@ class DeleteTweetTestCase(BaseTwitterCloneTestCase):
         delete_resp = form.submit()
 
         # Post conditions
+        #print(form.action)
         self.assertEqual(delete_resp.status_code, 302)
         self.assertTrue(delete_resp.location.endswith(
-            '/login?next=%s' % quote(form.action)))
+            '/login?next=%s' % quote(form.action)))#quote(form.action)))
         self.assertEqual(Tweet.objects.count(), 1)
